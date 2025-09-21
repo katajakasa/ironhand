@@ -1,11 +1,18 @@
+import json
 import logging
 
 from aiohttp import web
 
+log = logging.getLogger(__name__)
 
 async def webhook(request: web.Request) -> web.Response:
-    print(await request.json())
-    print(request.headers)
+    try:
+        body = await request.json()
+    except json.decoder.JSONDecodeError:
+        return web.Response(status=400)
+
+    log.error("Received headers: %s", request.headers)
+    log.error("Received message: %s", body)
     return web.Response(text="OK", status=200)
 
 
