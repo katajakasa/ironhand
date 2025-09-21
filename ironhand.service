@@ -1,0 +1,16 @@
+[Unit]
+Description=IronHand
+After=network.target
+
+[Service]
+User=tuomas
+Group=tuomas
+WorkingDirectory=/some/directory/ironhand
+ExecStart=poetry run gunicorn main:create_app --bind localhost:5089 --worker-class aiohttp.GunicornWebWorker
+ExecReload=/bin/kill -s HUP $MAINPID
+KillMode=mixed
+TimeoutStopSec=5
+PrivateTmp=true
+
+[Install]
+WantedBy=multi-user.target
