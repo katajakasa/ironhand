@@ -19,7 +19,7 @@ async def webhook(request: web.Request) -> web.Response:
 async def create_app() -> web.Application:
     logging.basicConfig(level=logging.INFO)
     app = web.Application()
-    app.add_routes([web.post("/webhook", webhook)])
+    app.add_routes([web.post("/webhooks/civ6", webhook)])
     return app
 
 
