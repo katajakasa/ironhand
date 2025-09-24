@@ -1,5 +1,5 @@
 start:
-	python -m main
+	python -m ironhand
 
 prod:
-	gunicorn main:create_app --bind localhost:8080 --worker-class aiohttp.GunicornWebWorker
+	gunicorn ironhand:app --bind localhost:8080 --worker-class aiohttp.GunicornWebWorker
